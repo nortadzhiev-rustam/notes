@@ -1,0 +1,17 @@
+module.exports =[
+    { title: "Note 1", id: "1" , createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "1", message: "This is a note1"},
+    { title: "Note 2", id: "2", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "2", message: "This is a note2" },
+    { title: "Note 3", id: "3", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "3", message: "This is a note3" },
+    { title: "Note 4", id: "4", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "4", message: "This is a note4" },
+    { title: "Note 5", id: "5", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "5", message: "This is a note5" },
+    { title: "Note 6", id: "1", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "1", message: "This is a note6" },
+    { title: "Note 7", id: "2", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "2", message: "This is a note7" },
+    { title: "Note 8", id: "3", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "3", message: "This is a note8" },
+    { title: "Note 9", id: "4", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "4", message: "This is a note9" },
+    { title: "Note 10", id: "5", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "5", message: "This is a note10" },
+    { title: "Note 11", id: "1", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "1", message: "This is a note11" },
+    { title: "Note 12", id: "2", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "2", message: "This is a note12" },
+    { title: "Note 13", id: "3", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "3", message: "This is a note13" },
+    { title: "Note 14", id: "4", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "4", message: "This is a note14" },
+    { title: "Note 15", id: "5", createdAt: "2021-05-01T00:00:00.000Z", updatedAt: "2021-05-01T00:00:00.000Z", folderId: "5", message: "This is a note15" },
+]
