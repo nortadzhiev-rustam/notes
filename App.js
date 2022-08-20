@@ -1,4 +1,4 @@
-import MainNavigator from "./navigation/MainNavigation";
+import MainNavigator from "./navigation/MainNavigator";
 import { Provider } from "react-redux";
 import store from "./store/Store";
 export default function App() {

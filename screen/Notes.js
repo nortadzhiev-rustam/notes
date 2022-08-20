@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 
 
-const Notes = ({ navigation, route }) => {
-    const { message, title } = route.params;
+const Notes = ({ route }) => {
+    const { message, title } = route.params.note;
     return (
         <View style={styles.container}>
             <Text style={styles.textStyle}>{title}</Text>
@@ -20,6 +20,12 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: 'auto',
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+
     },
     textStyle: {
         color: 'black',

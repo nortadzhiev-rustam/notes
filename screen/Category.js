@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
@@ -8,6 +7,7 @@ import {
   Modal,
   Pressable,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
@@ -15,9 +15,9 @@ import notes from "../constants/notes";
 import Notes from "../components/notes";
 
 const Category = ({ navigation, route }) => {
-  const { itemId, title } = route.params;
+  const { itemId } = route.params;
   const [modalVisible, setModalVisible] = useState(false);
-  const [initialNotes, setInitialNotes] = useState(notes);
+  const [initialNotes] = useState(notes);
   const [filteredNotes, setFilteredNotes] = useState([]);
 
   useEffect(() => {
@@ -28,9 +28,12 @@ const Category = ({ navigation, route }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollview}>
-        <View style={{height: 350, marginVertical: 20}}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+      style={styles.scrollView}
+        alwaysBounceVertical={true}
+      >
+        <View style={{ height: 1000}}>
           {filteredNotes.map((note, idx) => {
             return <Notes key={idx} navigation={navigation} note={note} />;
           })}
@@ -58,7 +61,7 @@ const Category = ({ navigation, route }) => {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -66,11 +69,11 @@ export default Category;
 
 const styles = StyleSheet.create({
   container: {
+    
     flex: 1,
-    flexDirection: "column",
+    
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    
   },
   createButton: {
     width: 50,
@@ -111,12 +114,7 @@ const styles = StyleSheet.create({
   },
 
   scrollview: {
-    width: "90%",
-    flex: 1,
-    flexDirection: "column",
-
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "start",
+    marginHorizontal: 20,
   },
 });
