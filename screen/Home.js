@@ -7,20 +7,50 @@ import {
   TouchableOpacity,
   Modal,
   Pressable,
+  TextInput,
+  ScrollView,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
-import folders from "../constants/folders";
 import Folder from "../components/folder";
+import ColorPicker from "../components/colorPicker";
+import { collection, getDocs, setDoc, doc } from "@firebase/firestore";
+import { db } from "../firebase";
 const Home = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [folders, setFolders] = useState([]);
+  const [folderName, setFolderName] = useState("");
+  const [color, setColor] = useState("");
+  const [added, setAdded] = useState(false);
+  useEffect(() => {
+    const getFolders = async () => {
+      const querySnapshot = await getDocs(collection(db, "folders"));
+      setFolders(querySnapshot.docs.map((doc) => doc.data())); // <--- this is where the error is
+      console.log(querySnapshot.docs.map((doc) => doc.data()));
+    };
+    getFolders();
+  }, [added]);
+
+  const addFolder = async () => {
+    const newFolder = {
+      id: String(folders.length + 1),
+      title: folderName,
+      color: color,
+    };
+    await setDoc(doc(db, "folders", String(folders.length + 1)), newFolder);
+    setAdded(!added);
+    setFolderName("");
+    setModalVisible(false);
+  };
   return (
     <View style={styles.container}>
-      <View style={styles.folderContainer}>
-        {folders.map((folder, idx) => {
-          return <Folder key={idx} navigation={navigation} folder={folder} />;
-        })}
-      </View>
+      <ScrollView>
+        <View style={styles.folderContainer}>
+          {folders.map((folder, idx) => {
+            return <Folder key={idx} navigation={navigation} folder={folder} />;
+          })}
+        </View>
+      </ScrollView>
       <TouchableOpacity
         onPress={() => {
           setModalVisible(true);
@@ -32,13 +62,33 @@ const Home = ({ navigation }) => {
       <Modal visible={modalVisible} animationType='slide'>
         <View style={styles.container}>
           <View style={styles.modal}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
+            <Text style={styles.modalText}>Create a new folder</Text>
+            <TextInput
+              underlineColorAndroid={"transparent"}
+              placeholder='Enter Folder Name'
+              value={folderName}
+              onChangeText={(text) => setFolderName(text)}
+              style={styles.inputStyle}
+            />
+            <View style={styles.sellectedColor}>
+              <Text>Selected Color: </Text>
+              <View
+                style={{ backgroundColor: color, width: 30, height: 30 }}
+              ></View>
+            </View>
+            <Text style={styles.colorPickerText}>Please select the color</Text>
+            <ColorPicker setColor={(clr) => setColor(clr)} />
+            <View style={styles.buttonContainer}>
+              <Pressable style={styles.button} onPress={addFolder}>
+                <Text style={styles.textStyle}>Save</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>Cancel</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
@@ -70,23 +120,21 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 15,
-    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
-
     right: 10,
     bottom: 10,
   },
   modal: {
     width: "90%",
-    height: 500,
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
+    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -96,6 +144,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
   button: {
     backgroundColor: "orange",
     padding: 10,
@@ -103,5 +157,39 @@ const styles = StyleSheet.create({
     margin: 5,
     alignItems: "center",
     justifyContent: "center",
+  },
+  sellectedColor: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: "row-reverse",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonClose: {
+    backgroundColor: "#FF0000",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  inputStyle: {
+    height: 60,
+    width: "100%",
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+  },
+  colorPickerText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 10,
+    textAlign: "center",
   },
 });

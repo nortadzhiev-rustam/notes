@@ -29,11 +29,8 @@ const Category = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-      style={styles.scrollView}
-        alwaysBounceVertical={true}
-      >
-        <View style={{ height: 1000}}>
+      <ScrollView style={styles.scrollView} alwaysBounceVertical={true}>
+        <View >
           {filteredNotes.map((note, idx) => {
             return <Notes key={idx} navigation={navigation} note={note} />;
           })}
@@ -58,7 +55,9 @@ const Category = ({ navigation, route }) => {
             >
               <Text style={styles.textStyle}>Hide Modal</Text>
             </Pressable>
+            
           </View>
+          
         </View>
       </Modal>
     </SafeAreaView>
@@ -69,11 +68,9 @@ export default Category;
 
 const styles = StyleSheet.create({
   container: {
-    
     flex: 1,
-    
+
     backgroundColor: "#fff",
-    
   },
   createButton: {
     width: 50,
