@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import Folder from "../components/folder";
 import ColorPicker from "../components/colorPicker";
+
 import { collection, getDocs, setDoc, doc } from "@firebase/firestore";
 import { db } from "../firebase";
 const Home = ({ navigation }) => {

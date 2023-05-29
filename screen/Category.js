@@ -8,11 +8,14 @@ import {
   Pressable,
   ScrollView,
   SafeAreaView,
+ 
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import notes from "../constants/notes";
 import Notes from "../components/notes";
+import SearchBar from '../components/searchbar';
+import {Input, Icon} from 'react-native-elements'
 
 const Category = ({ navigation, route }) => {
   const { itemId } = route.params;
@@ -29,7 +32,15 @@ const Category = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+       <View style={styles.folderView}>
+          <Text style={styles.textFolder}>Notes</Text>
+        </View>
       <ScrollView style={styles.scrollView} alwaysBounceVertical={true}>
+       <View>
+       <SearchBar/>
+
+        
+       </View>
         <View >
           {filteredNotes.map((note, idx) => {
             return <Notes key={idx} navigation={navigation} note={note} />;
@@ -87,6 +98,7 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 500,
     margin: 20,
+    maarginTop: 100,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
@@ -114,4 +126,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginHorizontal: 20,
   },
+  folderView: {
+    marginBlock: 20,
+    
+  },
+  textFolder: {
+    fontSize: 36,
+    margin: 10,
+    fontWeight: 'bold'
+  }, 
+  inputStyle: {
+    height: 40,
+    width: "95%",
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 10,
+    marginLeft: 10,
+    marginRight: 10
+  }
 });

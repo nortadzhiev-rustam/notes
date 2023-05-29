@@ -13,7 +13,7 @@ export default function MainNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='Folders' component={Home} />
         <Stack.Screen
           name='Notes'
           component={Category}
